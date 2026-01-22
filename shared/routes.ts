@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { users } from './schema';
 
 export const errorSchemas = {
   validation: z.object({
@@ -14,7 +15,6 @@ export const errorSchemas = {
 };
 
 export const api = {
-  // We can add server-side tracking if needed, but this is primarily a client-side dApp
   users: {
     getOrCreate: {
       method: 'POST' as const,
@@ -23,7 +23,7 @@ export const api = {
         walletAddress: z.string(),
       }),
       responses: {
-        200: z.object({ id: z.number(), walletAddress: z.string() }),
+        200: z.custom<typeof users.$inferSelect>(),
       },
     },
   },
