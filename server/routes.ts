@@ -26,7 +26,24 @@ export async function registerRoutes(
           field: err.errors[0].path.join('.'),
         });
       }
-      throw err;
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  app.patch(api.users.updateBalance.path, async (req, res) => {
+    try {
+      const { address } = req.params;
+      const input = api.users.updateBalance.input.parse(req.body);
+      const user = await storage.updateUserBalance(address, input.stakedBalance);
+      res.json(user);
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        return res.status(400).json({
+          message: err.errors[0].message,
+          field: err.errors[0].path.join('.'),
+        });
+      }
+      res.status(500).json({ message: "Internal server error" });
     }
   });
 
