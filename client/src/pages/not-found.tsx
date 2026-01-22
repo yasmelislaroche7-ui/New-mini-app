@@ -1,21 +1,31 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { Link } from "wouter";
+import { CyberButton } from "@/components/CyberButton";
+import { AlertTriangle } from "lucide-react";
+import { MatrixRain } from "@/components/MatrixRain";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
-          </div>
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-black text-primary p-4 overflow-hidden relative">
+      <MatrixRain />
+      
+      <div className="z-10 bg-black/90 p-12 border border-primary/30 backdrop-blur text-center space-y-6 max-w-lg">
+        <AlertTriangle className="w-24 h-24 mx-auto text-primary animate-pulse" />
+        
+        <div className="space-y-2">
+          <h1 className="text-6xl font-bold glitch-effect">404</h1>
+          <h2 className="text-xl font-mono tracking-widest">SYSTEM ERROR</h2>
+        </div>
 
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
-          </p>
-        </CardContent>
-      </Card>
+        <p className="text-primary/60 font-mono">
+          The requested data segment could not be located in the matrix.
+        </p>
+
+        <Link href="/" className="inline-block pt-4">
+          <CyberButton className="w-full min-w-[200px]">
+            RETURN TO SOURCE
+          </CyberButton>
+        </Link>
+      </div>
     </div>
   );
 }
