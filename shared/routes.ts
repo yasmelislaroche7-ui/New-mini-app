@@ -26,6 +26,16 @@ export const api = {
         200: z.custom<typeof users.$inferSelect>(),
       },
     },
+    updateBalance: {
+      method: 'PATCH' as const,
+      path: '/api/users/:address/balance',
+      input: z.object({
+        stakedBalance: z.string(),
+      }),
+      responses: {
+        200: z.custom<typeof users.$inferSelect>(),
+      },
+    }
   },
 };
 

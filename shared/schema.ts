@@ -1,10 +1,12 @@
-import { pgTable, text, serial, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, timestamp, integer } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   walletAddress: text("wallet_address").unique().notNull(),
+  lastStakeAt: timestamp("last_stake_at"),
+  stakedBalance: text("staked_balance").default("0"),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
